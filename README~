@@ -1,0 +1,49 @@
+#===================================================
+Ruby on Rails category filtering - created by John Russell Jan 2012
+#===================================================
+
+This code snippet generates clickable categories for filtering down results to display in a view.  Also provides a 'remove' link each of the filters that have been added to results.
+
+Copy the code from each of the files into the corresponding files in your rails app.  In this example I have included a 'Widget' model that has a controller and an index file to demonstrate usage.
+
+This currently does full page refreshes to update results.  I will hopefully add the javascript I used for ajax results updating at a later date.
+
+This code was used in a Rails 2.3 app.  It's not fully tested on Rails 3 + so please let me know if anyone gets chance to test on later versions.
+
+Add into your rails app as follows:
+
+Step 1:
+-------
+
+Copy the two methods - selected_filter_conditions and filter_headings into your application_controller.rb file
+
+Step 2:
+-------
+
+Copy all of the methods - select_filter, remove_filter, display_remove_filters, display_filter_heading, split_and_camel into your application_helper.rb file
+
+Step 3:
+-------
+
+Within the model.rb that you wish to filter results for (ie Widget.rb) copy the self.filters method.  This should be changed to list all of the models that your 'Widget' model will be filtered on.  This needs to be in 'tableized' form - ie lowercase, pluralized, and underscores used for multi word model names.  It is assumed that all of these models will have a 'has_many' relationship to your 'Widget' model
+
+Step 4:
+-------
+
+In the controller for your model  - 'widgets_controller.rb', copy the code in the example file into whichever action and corresponding view file you wish to use the filters in.  In this instance I have used them in the index action of the Widgets controller but these could be used anywhere as long as it is in the correct controller for the model you added the filters method to.
+
+Ensure you change all references to model name to your model, including variables for returned results etc.
+
+You can combine the filter with any named scopes you may have on your model as in the commented example.  This could also be potentially combined with any full text index you may use, so you could have a combined search/filtering functionality.  I originally used acts_as_ferret on the original application this code was used for, but have removed it here to keep retain it's general usage.
+
+Step 5:
+-------
+
+Finally, add the two lines for the helpers - display_filter_headings to list the category filters and number of 'Widgets' in each category, and display_remove_filters to enable the clickable remove links.  These should be copied into the relevant view file for the action you added the methods to in your 'Widget' controller.
+
+Step 6  - There is no step 6!
+------------------------------
+
+Ok you are now good to go with all the filtering goodness added to your site. You may want to add a nice delete class in your css to display a cross icon or some such instead of filter name.  Again that's a little application specific so I have removed it here.
+
+

@@ -1,0 +1,9 @@
+...
+
+<%= display_remove_filters(@widgets, @selected_filters, :index) %>
+
+...
+
+<%= display_filter_headings(@widgets, @filters, @selected_filters, :index) %>
+
+...

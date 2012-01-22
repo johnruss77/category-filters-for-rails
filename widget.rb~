@@ -1,0 +1,14 @@
+class Widget < ActiveRecord::Base
+
+...
+
+  #  All filters to be used on widget model need to be listed here.  All of the filter models will have a 'has_many' relationshiip
+  #  to the Widget model itself.  ie each of these categories will have many widgets that belong to it in the db
+ 
+  def self.filters
+    ["regions", "industries", "salaries", "classifications", "subject_areas", "job_types"]
+  end
+
+...
+
+end
